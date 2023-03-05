@@ -28,7 +28,7 @@ a{
 }
 .display{
     height: 16%;
-    background: #E0E5EA;
+    background: #c6d4e4;
     border-radius: 10px;
     margin: 20px 10px;
     border: 2px solid black;
@@ -62,20 +62,40 @@ a{
     margin-left: 10px;
     
 }
-
+#clear{
+    background-color: rgb(245, 118, 96);
+}
+#equal{
+    background-color: rgb(157, 236, 133); 
+}
 #clear,#equal{
     cursor: pointer;
     box-shadow: 2px 2px 0  black;
     transition: all 0.1s;
     height: 65px;
 }
-#clear:hover ,#equal:hover{
-    background-color: #E0E5EA;
+#clear:hover{
+    background-color: rgb(240, 93, 68);
+}
+#equal:hover{
+    background-color: rgb(121, 236, 86); 
 }
 #clear:active ,#equal:active{
     transform: translateX(4px) translateY(4px);
     box-shadow: none;
    
+}
+.operator, .extra{
+    background-color: rgb(112, 197, 236);
+}
+.operator:hover, .extra:hover{
+    background-color: rgb(65, 173, 223);
+}
+.number, .dot{
+    background-color: #615f5f;
+}
+.number:hover, .dot:hover{
+    background-color: #474545;
 }
 
 .key{
@@ -84,19 +104,15 @@ a{
     border: 1px solid black;
     border-radius: 7px;
     margin: 5px;
-    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 20px;
     transition: all 0.1s;
+    color: white;
     cursor: pointer;
     box-shadow: 2px 2px 0  black;
     margin-bottom: 22px;
-}
-
-.key:hover{
-    background-color: #E0E5EA;
 }
 .key:active{
     transform: translateX(4px) translateY(4px);
