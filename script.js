@@ -1,6 +1,8 @@
 let currentNum = "";
 let previousNum = "";
 let operator = "";
+let prevop = "";
+let content = "";
 // Dom Elements
 const numberBtns = document.querySelectorAll('.number');
 numberBtns.forEach((btn)=>{
@@ -14,7 +16,7 @@ const currentDisplay = document.getElementById('disp-2');
 
 function numberHandler(num){
     if(currentNum.length > 12){
-        alert("Max 12 Numbers can be Inputed!")
+        alert("Max 12 Numbers can be Inputed!");
     }
     currentNum += num;
     currentDisplay.textContent = currentNum;
@@ -29,9 +31,37 @@ operatorBtns.forEach((btn)=>{
 
 function operatorHandler(op){
     operator = op;
-    previousNum += currentNum;
-    previousDisplay.textContent = previousNum + op;
-    currentNum = "";
+    if(previousNum !== ""){       
+     calculater()
+    }
+    else{
+        previousNum = currentNum;
+        previousDisplay.textContent = previousNum + op;
+        currentNum = "";
+        currentDisplay.textContent = "";
+    }
+    
+    prevop = op;
+}
+function calculater(){
+    currentNum = parseFloat(currentNum);
+    previousNum = parseFloat(previousNum);
+    if(prevop === "+"){
+        previousNum += currentNum;
+    }
+    else if(prevop === "-"){
+        previousNum -= currentNum;
+    }
+    else if(prevop === "/"){
+        previousNum /= currentNum;
+    }
+    else if(prevop === "*"){
+        previousNum *= currentNum;
+    } 
+    currentNum.toString();
+    previousNum.toString();
+    currentNum = "0";
+    previousDisplay.textContent = previousNum;
     currentDisplay.textContent = "";
 }
 const dot = document.getElementsByClassName('dot')[0];
