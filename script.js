@@ -70,9 +70,14 @@ dot.addEventListener('click', (e)=>{
 })
 
 function dothandler(dt){
+    let x = currentNum.lastIndexOf();
+    if(currentNum.includes(".")){
+        alert("Consecutive Decimals not allowed!")
+    }
+    else{
     currentNum += dt;
     currentDisplay.textContent = currentNum;
-    
+    }
 }
 const equalEl = document.getElementById('equal');
 equalEl.addEventListener('click', ()=>{
@@ -80,6 +85,9 @@ equalEl.addEventListener('click', ()=>{
 })
 
 function calculate(){
+    if( currentNum === "" && currentDisplay.textContent === ""){
+       return null
+    }
     currentNum = parseFloat(currentNum);
     previousNum = parseFloat(previousNum);
     if(operator === "+"){
@@ -89,7 +97,12 @@ function calculate(){
         currentNum = previousNum-currentNum;
     }
     else if(operator === "/"){
+        if(currentNum === 0){
+            alert("Error BROoo!! how dare you divide by 0")
+        }
+        else{
         currentNum = previousNum/currentNum;
+        }
     }
     else if(operator === "*"){
         currentNum *= previousNum;
