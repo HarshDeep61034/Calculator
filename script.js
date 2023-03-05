@@ -1,47 +1,82 @@
-// Functions
-function add(a, b){
-    return a+b;
-}
-
-function subtract(a, b){
-    return a-b;
-}
-
-function multiply(a, b){
-    return a*b;
-}
-
-function divide(a, b){
-    return a/b;
-}
-
-function operator(x, a, b){
-    if(x === "+"){
-        return add(a,b);
-    }
-    else if(x === "-"){
-        return subtract(a,b);
-    }
-    else if(x === "*"){
-        return multiply(a,b);
-    }
-    else if(x === "/"){
-        return divide(a,b);
-    }
-}
-
-// Accessing  DOM Elements
-const displayEl = document.getElementsByClassName('display')[0];
-const clearEl = document.getElementById('clear');
-
-// clearing Display Function
-clearEl.addEventListener('click', ()=>{
-    displayEl.textContent = "0";
+let currentNum = "";
+let previousNum = "";
+let operator = "";
+// Dom Elements
+const numberBtns = document.querySelectorAll('.number');
+numberBtns.forEach((btn)=>{
+    btn.addEventListener('click', (e)=>{
+        numberHandler(e.target.textContent);
+    })
 })
 
-// Display function
-var value = "";
-function display(clicked_id){
-    value = value+clicked_id;
-    displayEl.textContent = value;
+const previousDisplay = document.getElementById('disp-1');
+const currentDisplay = document.getElementById('disp-2');
+
+function numberHandler(num){
+    if(currentNum.length > 12){
+        alert("Max 12 Numbers can be Inputed!")
+    }
+    currentNum += num;
+    currentDisplay.textContent = currentNum;
 }
+
+const operatorBtns = document.querySelectorAll('.operator');
+operatorBtns.forEach((btn)=>{
+    btn.addEventListener('click', (e)=>{
+        operatorHandler(e.target.textContent);
+    })
+})
+
+function operatorHandler(op){
+    operator = op;
+    previousNum += currentNum;
+    previousDisplay.textContent = previousNum + op;
+    currentNum = "";
+    currentDisplay.textContent = "";
+}
+const dot = document.getElementsByClassName('dot')[0];
+dot.addEventListener('click', (e)=>{
+    dothandler(e.target.textContent);
+})
+
+function dothandler(dt){
+    currentNum += dt;
+    currentDisplay.textContent = currentNum;
+    
+}
+const equalEl = document.getElementById('equal');
+equalEl.addEventListener('click', ()=>{
+    calculate()
+})
+
+function calculate(){
+    currentNum = parseFloat(currentNum);
+    previousNum = parseFloat(previousNum);
+    if(operator === "+"){
+        currentNum += previousNum;
+    }
+    else if(operator === "-"){
+        currentNum = previousNum-currentNum;
+    }
+    else if(operator === "/"){
+        currentNum = previousNum/currentNum;
+    }
+    else if(operator === "*"){
+        currentNum *= previousNum;
+    }
+    currentNum = Math.round(currentNum *1000000)/1000000
+    currentNum.toString();
+    previousNum.toString();
+    currentDisplay.textContent = currentNum;
+    previousDisplay.textContent = "";
+}
+
+
+const clear = document.getElementById('clear');
+clear.addEventListener('click', ()=>{
+    currentDisplay.textContent = "";
+    previousDisplay.textContent = "";
+    currentNum = "";
+    previousNum = "";
+    operator = "";
+})
